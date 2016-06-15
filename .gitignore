@@ -92,4 +92,5 @@ ENV/
 .project
 .pydevproject
 .settings
+db.sqlite3
 
