@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}List{% endblock title %}
+{% block head %}
+	<script>		
+		$(document).ready(function() {
+		    $('#todo').DataTable({
+		    	"columnDefs": [
+		    		{ "type": "datetime-moment", targets: (3, 4)}
+		    	]
+		    });
+		} );				
+	</script>
+{% endblock head %}
+{% block nav %}
+	<li class="active"><a href="{% url 'home' %}" title="">Home</a></li>	
+{% endblock nav %}
+{% block container %}
+	<div class="row">
+		<div class="col-sm-12 col-md-12 main">
+			{% block pageheaders %}
+				<h1 class="page-header">
+					<span class="glyphicon glyphicon-check" aria-hidden="true"></span> 
+					To-dos								
+				</h1>						
+			{% endblock pageheaders %}
+			{% block alerts %}{% endblock alerts %}
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-12 col-md-12 main">	
+	        <form method="POST">
+	        	{% csrf_token %}
+	        	<div class="form-group">
+		        	<label for=""id_new_item"">New item:</label>
+		            <input type="text" name="item_text" class="form-control" id="id_new_item" placeholder="Enter a to-do item" />
+	            </div>	            
+	        </form>
+	        <div class="table-responsive">
+		        <table class="table" id="todo">
+		        	<thead>
+		        		<tr>
+		        			<th>#</th>
+		        			<th>Item</th>
+		        			<th>Tags</th>
+		        			<th>Created</th>
+		        			<th>Completed</th>
+		        		</tr>
+		        	</thead>
+		        	<tbody>
+			            {% for item in items %}
+			                <tr>
+			                	<td>{{ forloop.counter }}</td>
+			                	<td><a href="{% url 'item' item.pk %}">{{ item.text }}</a></td>	                	
+			                	<td>
+									{% for tag in item.tags.all %}
+										<span class="badge">{{ tag.name }}</span>
+									{% endfor %}	                	
+			                	</td>	                		                		                	
+			                	<td>{{ item.friendly_created_date }}</td>
+			                	{% if item.completed_date %}
+			                		<td>{{ item.friendly_completed_date }}</td>
+			                	{% else %}
+			                		<td></td>
+			                	{% endif %}
+			                	
+			                </tr>
+			            {% endfor %}
+		            </tbody>
+		        </table>
+	        </div>			
+		</div>
+	</div>	
+{% endblock container %}

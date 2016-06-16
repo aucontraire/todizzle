@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Item{% endblock title %}
+{% block head %}{% endblock head %}
+{% block nav %}
+	<li><a href="{% url 'home' %}" title="">Home</a></li>	
+{% endblock nav %}
+{% block container %}
+	<div class="row">
+		<div class="col-sm-12 col-md-12 main">
+			{% block pageheaders %}
+				<h1 class="page-header">
+					<span class="glyphicon glyphicon-check" aria-hidden="true"></span> 
+					To-dos								
+				</h1>
+				<h4 class="sub-header">{{ item.text }}</h4>									
+			{% endblock pageheaders %}
+			{% block alerts %}{% endblock alerts %}
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-12 col-md-12 main">	
+			Created: {{ item.created }}<br>
+			Updated: {{ item.updated }}<br>
+			Due date: {{ item.due_date }}<br>
+			Completed: {{ item.completed }}<br>
+			Completed date: {{ item.completed_date }}<br>
+			Tags:
+			{% for tag in item.tags.all %}
+				<span class="badge">{{ tag.name }}</span>
+			{% endfor %}	           	
+		</div>
+	</div>	
+{% endblock container %}
