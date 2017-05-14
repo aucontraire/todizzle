@@ -6,7 +6,7 @@ from .models import Item, Tag
 class ItemAdmin(admin.ModelAdmin):
     search_fields = ['text']
     
-    list_display = ('created', 'updated', 'text')
+    list_display = ('created', 'updated', 'completed', 'archived', 'text')
     
     list_filter = ['text']
     
