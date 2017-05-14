@@ -25,7 +25,12 @@ class Item(models.Model):
     def friendly_created_date(self):        
         created = self.created
 
-        return created.strftime('%B %d, %Y, %I:%M %p')  
+        return created.strftime('%B %d, %Y, %I:%M %p')
+    
+    def friendly_due_date(self):
+        due_date = self.due_date
+        
+        return due_date.strftime('%B %d, %Y, %I:%M %p')
 
     def friendly_completed_date(self):
         completed_date = self.completed_date

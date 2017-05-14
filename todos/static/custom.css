@@ -1,19 +1,7 @@
-.label-as-badge {
-	border-radius: 1em;
+.table > tbody > tr.completed > td {
+	background-color: #cccccc;
 }
-.favorite {
-  background-color: #d9edf7;
-  border: 1px solid #709CA4;
-  border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
-}
-.removed {
-  background-color: #ccc;
-  border: 1px solid #709CA4;
-  border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
+
+.glyphicon-ok, .glyphicon-remove, .glyphicon-circle-arrow-down {
+	cursor: pointer;
 }

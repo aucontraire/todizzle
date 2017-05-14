@@ -45,7 +45,7 @@
 	    <script src="{% static 'js/moment-with-locales.min.js' %}"></script>
 	    
 	    <!-- d3.js -->
-	    <script src="{% static 'js/d3.min.js' %}" charset="utf-8"></script>		
+	    <script src="{% static 'js/d3.min.js' %}" charset="utf-8"></script>
 		
 		{% block head %}{% endblock head %}
 	</head>
@@ -66,6 +66,9 @@
 						<ul class="nav navbar-nav navbar-right">
 							{% block nav %}{% endblock nav %}
 						</ul>
+						<form class="navbar-form navbar-right">
+            				<input type="text" class="form-control" placeholder="Search...">
+          				</form>						
 					</div>
 				</div>
 			</nav>			
