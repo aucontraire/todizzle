@@ -19,7 +19,12 @@
 		    } );
 		    
 		    $('.glyphicon-circle-arrow-down').click(function (event){
-		    	alert('archive');
+		    	var target = $(event.target);
+		    	var item_pk = target.attr("data-item-pk");
+		    	$.ajax({
+		    		url : "/item/" + item_pk + "/archive",
+		    		type : 'get'
+		    	});
 		    });
 		    
 		    $('.glyphicon-ok').click(function(event) {
@@ -91,7 +96,7 @@
 			                	<td>
 			                		<span class="glyphicon glyphicon-ok" data-item-pk="{{ item.pk }}" aria-hidden="true" title="complete"></span>
 			                		<span class="glyphicon glyphicon-remove" aria-hidden="true" title="delete"></span>
-			                		<span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true" title="archive"></span>
+			                		<span class="glyphicon glyphicon-circle-arrow-down" data-item-pk="{{ item.pk }}" aria-hidden="true" title="archive"></span>
 			                	</td>			                	
 			                </tr>
 			            {% endfor %}

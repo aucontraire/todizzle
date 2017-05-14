@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^$', views.home_page, name='home'),
     url(r'^item/(\d+)$', views.item_page, name="item"),
     url(r'^item/(\d+)/complete', views.item_complete, name='item_complete'),
+    url(r'^item/(\d+)/archive', views.item_archive, name='item_archive'),
     url(r'^admin/', admin.site.urls),
 ]

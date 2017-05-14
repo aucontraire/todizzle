@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.template.defaultfilters import default
 
 
 class Tag(models.Model):
@@ -17,7 +18,8 @@ class Item(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
-    completed_date = models.DateTimeField(blank=True, null=True)    
+    completed_date = models.DateTimeField(blank=True, null=True)
+    archived = models.BooleanField(default=False) 
     
     def __str__(self):
         return self.text
