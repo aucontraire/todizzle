@@ -9,6 +9,12 @@
 		    	]
 		    });
 		    
+		    function get_pk(event){
+		    	var target = $(event.target);
+		    	var item_pk = target.attr('data-item-pk');
+		    	return item_pk;
+		    }
+		    
 		    $('.glyphicon-remove').click(function (event){
 		    	var deleted = confirm('Are you sure you want to delete this item?');
 		    	if (deleted) {
@@ -19,8 +25,7 @@
 		    } );
 		    
 		    $('.glyphicon-circle-arrow-down').click(function (event){
-		    	var target = $(event.target);
-		    	var item_pk = target.attr("data-item-pk");
+		    	var item_pk = get_pk(event);
 		    	$.ajax({
 		    		url : "/item/" + item_pk + "/archive",
 		    		type : 'get'
@@ -28,9 +33,7 @@
 		    });
 		    
 		    $('.glyphicon-ok').click(function(event) {
-		    	var target = $(event.target);
-		    	var item_pk = target.attr("data-item-pk");
-		  				    	
+		    	var item_pk = get_pk(event);   	
 		    	$.ajax({
 		    		url : "/item/" + item_pk + "/complete",
 		    		type : 'get'
