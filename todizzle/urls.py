@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^item/(\d+)$', views.item_page, name="item"),
     url(r'^item/(\d+)/complete', views.item_complete, name='item_complete'),
     url(r'^item/(\d+)/archive', views.item_archive, name='item_archive'),
+    url(r'^item/(\d+)/delete', views.item_delete, name='item_delete'),
     url(r'^admin/', admin.site.urls),
 ]

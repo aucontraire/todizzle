@@ -30,3 +30,7 @@ def item_archive(request, item_pk):
     item = Item.objects.get(pk=item_pk)
     item.archived = True
     item.save()
+    
+def item_delete(request, item_pk):
+    item = Item.objects.get(pk=item_pk)
+    item.delete()

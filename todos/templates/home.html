@@ -15,10 +15,23 @@
 		    	return item_pk;
 		    }
 		    
+		    $('.glyphicon-ok').click(function(event) {
+		    	var item_pk = get_pk(event);   	
+		    	$.ajax({
+		    		url : "/item/" + item_pk + "/complete",
+		    		type : 'get'
+		    	});
+		    });		    
+		    
 		    $('.glyphicon-remove').click(function (event){
+		    	var item_pk = get_pk(event);
 		    	var deleted = confirm('Are you sure you want to delete this item?');
 		    	if (deleted) {
-		    		alert('This item will be deleted now.');
+		    		alert('This item will be deleted now.'+ item_pk);
+			    	$.ajax({
+			    		url : "/item/" + item_pk + "/delete",
+			    		type : 'get'
+			    	});		    		
 		    	} else {
 		    		alert('You changed your mind, eh?');
 		    	}
@@ -32,13 +45,6 @@
 		    	});
 		    });
 		    
-		    $('.glyphicon-ok').click(function(event) {
-		    	var item_pk = get_pk(event);   	
-		    	$.ajax({
-		    		url : "/item/" + item_pk + "/complete",
-		    		type : 'get'
-		    	});
-		    });
 		} );				
 	</script>
 {% endblock head %}
@@ -98,7 +104,7 @@
 			                	{% endif %}
 			                	<td>
 			                		<span class="glyphicon glyphicon-ok" data-item-pk="{{ item.pk }}" aria-hidden="true" title="complete"></span>
-			                		<span class="glyphicon glyphicon-remove" aria-hidden="true" title="delete"></span>
+			                		<span class="glyphicon glyphicon-remove" data-item-pk="{{ item.pk }}" aria-hidden="true" title="delete"></span>
 			                		<span class="glyphicon glyphicon-circle-arrow-down" data-item-pk="{{ item.pk }}" aria-hidden="true" title="archive"></span>
 			                	</td>			                	
 			                </tr>
