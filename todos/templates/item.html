@@ -13,31 +13,23 @@
 				<h1 class="page-header">{{ item.text }}</h1>								
 			{% endblock pageheaders %}
 			{% block alerts %}{% endblock alerts %}
+			<div class="col-md-4"><span class="glyphicon glyphicon-calendar"></span> Created: <span class="badge">{{ item.created }}</span></div>
+			<div class="col-md-4"><span class="glyphicon glyphicon-calendar"></span> Updated: <span class="badge">{{ item.updated }}</span></div>
+			<div class="col-md-4"><span class="glyphicon glyphicon-calendar"></span> Completed: <span class="badge">{{ item.completed_date }}</span></div>	
 		</div>
 	</div>	
 	<div class="row">
 		<div class="col-sm-12 col-md-12 main">
-			<ul class="list-group">
-				<li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> Created: <span class="badge">{{ item.created }}</span></li>
-				<li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> Updated: <span class="badge">{{ item.updated }}</span></li>
-				
-				{% if item.due_date == None %}
-					<li class="list-group-item list-group-item-warning"><span class="glyphicon glyphicon-calendar"></span> Due date: {{ item.due_date }}</li>
-				{% else %}
-					<li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> Due date: <span class="badge">{{ item.due_date }}</span></li>
-				{% endif %}
-				{% if item.completed == False %}
-					<li class="list-group-item list-group-item-warning">Completed: {{ item.completed }}</li>
-				{% else %}
-					<li class="list-group-item">Completed: {{ item.completed }}</li>
-				{% endif %}
-				{% if item.completed_date == None %}
-					<li class="list-group-item list-group-item-warning"><span class="glyphicon glyphicon-calendar"></span> Completed date: {{ item.completed_date }}</li>
-				{% else %}
-					<li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-calendar"></span> Completed date: <span class="badge">{{ item.completed_date }}</span></li>
-				{% endif %}
-				
-				
+			<ul class="list-group">				
+				<li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> Due date: <span class="badge">{{ item.due_date }}</span></li>
+				<li class="list-group-item">
+					Completed:
+					{% if item.completed == False %}
+						<span class="glyphicon glyphicon-remove"></span>
+					{% else %}
+						<span class="glyphicon glyphicon-ok"></span>
+					{% endif %}
+				</li>		
 				<li class="list-group-item">
 					Tags:
 					{% for tag in item.tags.all %}
