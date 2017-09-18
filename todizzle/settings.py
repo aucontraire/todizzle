@@ -76,16 +76,28 @@ WSGI_APPLICATION = 'todizzle.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE':   'django.db.backends.postgresql_psycopg2',
-        'NAME':     'todizzle',
-        'USER':     'todizzle',
-        'PASSWORD': 'r07JAdCk6yLp',
-        'HOST':     'localhost',
-        'PORT':     '',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'todizzle',
+            'USER':     'todizzle',
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST':     os.environ['RDS_HOSTNAME'],
+            'PORT':     os.environ['RDS_PORT'],
+        }                 
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'todizzle',
+            'USER':     'todizzle',
+            'PASSWORD': 'r07JAdCk6yLp',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
 
 
 # Password validation
