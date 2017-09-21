@@ -139,5 +139,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "todos", "static")
 STATICFILES_DIRS = [
-    "/opt/python/current/app/todos/static/"
+    "/opt/python/current/app/todos/static/",
+    "/opt/python/run/venv/lib/python3.4/site-packages/django/contrib/admin/static/admin"
 ]
