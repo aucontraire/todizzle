@@ -30,7 +30,7 @@ class Item(models.Model):
         return created.strftime('%B %d, %Y, %I:%M %p')
     
     def friendly_due_date(self):
-        due_date = self.due_date
+        due_date = timezone.localtime(self.due_date)
         
         return due_date.strftime('%B %d, %Y, %I:%M %p')
 
