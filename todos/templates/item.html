@@ -26,23 +26,23 @@
 					<label for="id_due_date" class="col-sm-2 control-label">Due date:</label>
 					<div class="col-sm-10">
 						<div class='input-group date' id='datetimepicker1'>
-							{% if item.due_date %}
-								<input type='text' class="form-control" id="id_due_date" name="due_date"  />
-							{% else %}
-								<input type='text' class="form-control" id="id_due_date" name="due_date" value="" />
-							{% endif %}
+							<input type='text' class="form-control" id="id_due_date" name="due_date"  />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
 						<script type="text/javascript">
 						    $(function () {
-						    	var due_date = moment("{{ item.due_date }}", "MMMM DD, YYYY, hh:mm a.");						       
-						        var datetime = moment(due_date).format('MM/DD/YYYY h:mm A');
-
-						        $('#datetimepicker1').datetimepicker({
-						        	defaultDate: datetime
-						        });						        
+						    	var due_date = "{{ item.due_date }}";						
+						    	if (due_date !== "None") {						    
+						    		due_date = moment(moment(due_date, "MMMM DD, YYYY, hh:mm a.")).format('MM/DD/YYYY h:mm A');
+							        
+							        $('#datetimepicker1').datetimepicker({
+							        	defaultDate: due_date
+							        });								        
+						    	} else {
+						    		$('#datetimepicker1').datetimepicker();
+						    	}						    						        
 						    });
 						</script>
 					</div>				
@@ -67,7 +67,6 @@
 			</form>			           	
 		</div>
 	</div>	
-	
 	
 {% endblock container %}
 
