@@ -20,23 +20,54 @@
 	</div>	
 	<div class="row">
 		<div class="col-sm-12 col-md-12 main">
-			<ul class="list-group">				
-				<li class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> Due date: <span class="badge">{{ item.due_date }}</span></li>
-				<li class="list-group-item">
-					Completed:
-					{% if item.completed == False %}
-						<span class="glyphicon glyphicon-remove"></span>
-					{% else %}
-						<span class="glyphicon glyphicon-ok"></span>
-					{% endif %}
-				</li>		
-				<li class="list-group-item">
-					Tags:
-					{% for tag in item.tags.all %}
-						<span class="badge">{{ tag.name }}</span>
-					{% endfor %}				
-				</li>
-			</ul>	           	
+			<form class="form-horizontal" method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="id_due_date" class="col-sm-2 control-label">Due date:</label>
+					<div class="col-sm-10">
+						<div class='input-group date' id='datetimepicker1'>
+							{% if item.due_date %}
+								<input type='text' class="form-control" id="id_due_date" name="due_date"  />
+							{% else %}
+								<input type='text' class="form-control" id="id_due_date" name="due_date" value="" />
+							{% endif %}
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+						<script type="text/javascript">
+						    $(function () {
+						    	var due_date = moment("{{ item.due_date }}", "MMMM DD, YYYY, hh:mm a.");						       
+						        var datetime = moment(due_date).format('MM/DD/YYYY h:mm A');
+
+						        $('#datetimepicker1').datetimepicker({
+						        	defaultDate: datetime
+						        });						        
+						    });
+						</script>
+					</div>				
+				</div>
+				<div class="form-group">
+					<label for="id_tags" class="col-sm-2 control-label">Tags:</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" id="id_tags" name="tags" rows="3">
+							{% if item.tags %}
+								{% for tag in item.tags.all %}
+									{{ tag.name }}
+								{% endfor %}
+							{% endif %}
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</div>				
+			</form>			           	
 		</div>
 	</div>	
+	
+	
 {% endblock container %}
+

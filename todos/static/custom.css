@@ -5,3 +5,7 @@
 .glyphicon-ok, .glyphicon-remove, .glyphicon-circle-arrow-down {
 	cursor: pointer;
 }
+
+#datetimepicker1 {
+	cursor: pointer;
+}
