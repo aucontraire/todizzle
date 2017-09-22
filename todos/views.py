@@ -29,7 +29,7 @@ def item_page(request, item_pk):
     if request.method == 'POST':
         item.due_date = datetime.datetime.strptime(request.POST['due_date'], '%m/%d/%Y %I:%M %p') # (10/29/2015 12:00 AM) 
         
-        raw_tags = request.POST['tags']
+        raw_tags = request.POST['tags'].lower()
         raw_tags = raw_tags.split(",")
         tags_list = []
         for raw_tag in raw_tags:
