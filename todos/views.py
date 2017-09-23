@@ -25,19 +25,21 @@ def item_page(request, item_pk):
     else:
         tags = ''
         
-    
     if request.method == 'POST':
-        item.due_date = datetime.datetime.strptime(request.POST['due_date'], '%m/%d/%Y %I:%M %p') # (10/29/2015 12:00 AM) 
+        due_date = request.POST['due_date']
+        if due_date != '':
+            item.due_date = datetime.datetime.strptime(due_date, '%m/%d/%Y %I:%M %p') # (10/29/2015 12:00 AM) 
         
         raw_tags = "".join(request.POST['tags'].lower().split())
-        tags_list = []
-        for raw_tag in raw_tags.split(","):
-            tag, created = Tag.objects.get_or_create(name=raw_tag)
-            tags_list.append(tag)
-        
-        item.tags.add(*tags_list) 
+        if len(raw_tags) > 0:
+            tags_list = []
+            for raw_tag in raw_tags.split(","):
+                tag, created = Tag.objects.get_or_create(name=raw_tag)
+                tags_list.append(tag)
+            item.tags.add(*tags_list) 
         
         item.save()
+        
         return redirect('/')
     
     return render(request, 'item.html', { 'item': item, 'tags': tags })
