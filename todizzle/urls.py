@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^item/(\d+)/archive', views.item_archive, name='item_archive'),
     url(r'^item/(\d+)/delete', views.item_delete, name='item_delete'),
     
+    url(r'^tags$', views.tags_view, name='tags_view'),
     url(r'^tag/(\d+)$', views.tag_view, name='tag_view'),
     
     url(r'^admin/', admin.site.urls),

@@ -2,8 +2,7 @@
 {% block title %}Item{% endblock title %}
 {% block head %}{% endblock head %}
 {% block nav %}
-	<li><a href="#" title="">Tags</a></li>
-	<li><a href="#" title="">Projects</a></li>
+	<li><a href="{% url 'tags_view' %}" title="">Tags</a></li>
 	<li><a href="{% url 'home' %}" title="">Home</a></li>	
 {% endblock nav %}
 {% block container %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Tags{% endblock title %}
+{% block head %}
+	<script>
+		$(document).ready(function() {
+		    var table = $('#tags').DataTable({
+		    	"columnDefs": [
+		    		{ "type": "datetime-moment", targets: 1 }		    		
+		    	]
+		    });	    
+		});		
+	</script>
+{% endblock head %}
+{% block nav %}
+	<li class="active"><a href="{% url 'tags_view' %}" title="">Tags</a></li>
+	<li><a href="{% url 'home' %}" title="">Home</a></li>	
+{% endblock nav %}
+{% block container %}
+	<div class="row">
+		<div class="col-sm-12 col-md-12 main">
+			{% block pageheaders %}
+				<h1 class="page-header">Tags</h1>						
+			{% endblock pageheaders %}
+			{% block alerts %}{% endblock alerts %}
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-12 col-md-12 main">	
+	        <div class="table-responsive">
+		        <table class="table table-condensed" id="tags">
+		        	<thead>
+		        		<tr>
+		        			<th>Tag</th>
+		        			<th>Created</th>
+		        		</tr>
+		        	</thead>
+		        	<tbody>
+		        		{% if tags %}		        			
+		        			{% for tag in tags %}
+		        				<tr>
+		        					<td><a href="{% url 'tag_view' tag.pk %}">{{ tag.name }}</a></td>
+		        					<td>{{ tag.friendly_created_date }}</td>
+		        				</tr>
+		        			{% endfor %}
+		        		{% else %}
+		        			<tr><td>No tags exist yet.</td></tr>
+		        		{% endif %}		   			          
+		            </tbody>
+		        </table>
+	        </div>			
+		</div>
+	</div>	
+{% endblock container %}

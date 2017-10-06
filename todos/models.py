@@ -10,6 +10,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    def friendly_created_date(self):        
+        created = self.created
+
+        return created.strftime('%B %d, %Y, %I:%M %p')
 
 class Item(models.Model):
     created = models.DateTimeField(default=timezone.now, blank=True)

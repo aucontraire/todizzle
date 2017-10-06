@@ -62,6 +62,11 @@ def item_delete(request, item_pk):
     item = Item.objects.get(pk=item_pk)
     item.delete()
 
+def tags_view(request):
+    tags = Tag.objects.all().order_by('name')
+    
+    return render(request, 'tags.html', { 'tags': tags })
+
 def tag_view(request, tag_pk):
     tag = Tag.objects.get(pk=tag_pk)
     items = Item.objects.filter(tags=tag).filter(archived=False).order_by('-created')
