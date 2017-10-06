@@ -62,3 +62,16 @@ def item_delete(request, item_pk):
     item = Item.objects.get(pk=item_pk)
     item.delete()
 
+def tag_view(request, tag_pk):
+    tag = Tag.objects.get(pk=tag_pk)
+    items = Item.objects.filter(tags=tag).filter(archived=False).order_by('-created')
+    
+    if request.method == 'POST':
+        item = Item.objects.create(text=request.POST['item_text'])
+        item.tags.add(tag)
+        
+        return redirect('tag_view', tag.pk)
+    
+    return render(request, 'tag.html', { 'tag': tag, 'items': items })
+    
+

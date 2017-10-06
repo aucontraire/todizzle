@@ -23,5 +23,8 @@ urlpatterns = [
     url(r'^item/(\d+)/complete', views.item_complete, name='item_complete'),
     url(r'^item/(\d+)/archive', views.item_archive, name='item_archive'),
     url(r'^item/(\d+)/delete', views.item_delete, name='item_delete'),
+    
+    url(r'^tag/(\d+)$', views.tag_view, name='tag_view'),
+    
     url(r'^admin/', admin.site.urls),
 ]
