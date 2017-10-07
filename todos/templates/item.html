@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Item{% endblock title %}
-{% block head %}{% endblock head %}
+{% block head %}
+	<style>
+		.bootstrap-tagsinput {
+			width: 100%;
+		}
+	</style>
+{% endblock head %}
 {% block nav %}
 	<li><a href="{% url 'tags_view' %}" title="">Tags</a></li>
 	<li><a href="{% url 'home' %}" title="">Home</a></li>	
