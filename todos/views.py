@@ -1,17 +1,23 @@
 from django.shortcuts import redirect, render
+from django.views.generic import View
 
 from todos.models import Item, Tag
 
 from django.utils import timezone
 import datetime
 
-def home_page(request):
-    if request.method == 'POST':
-        Item.objects.create(text=request.POST['item_text'])
-        return redirect('/')
+
+class HomeView(View):
+    def get(self, request):
+        items = Item.objects.all().filter(archived=False).order_by('-created')
+        
+        return render(request, 'home.html', { 'items': items })
     
-    items = Item.objects.all().filter(archived=False).order_by('-created')
-    return render(request, 'home.html', { 'items': items })
+    def post(self, request, *args, **kwargs):
+        Item.objects.create(text=request.POST['item_text'])
+        
+        return redirect('/')
+
 
 def item_page(request, item_pk):
     item = Item.objects.get(pk=item_pk)

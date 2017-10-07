@@ -18,7 +18,8 @@ from django.contrib import admin
 from todos import views
 
 urlpatterns = [
-    url(r'^$', views.home_page, name='home'),
+    url(r'^$', views.HomeView.as_view(), name='home'),
+    
     url(r'^item/(\d+)$', views.item_page, name="item"),
     url(r'^item/(\d+)/complete', views.item_complete, name='item_complete'),
     url(r'^item/(\d+)/archive', views.item_archive, name='item_archive'),
