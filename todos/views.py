@@ -1,13 +1,14 @@
 from django.shortcuts import redirect, render
-from django.views.generic import View
+from django.views import generic
+from django.utils import timezone
 
 from todos.models import Item, Tag
+from todos.forms import TagForm
 
-from django.utils import timezone
 import datetime
 
 
-class HomeView(View):
+class HomeView(generic.View):
     def get(self, request):
         items = Item.objects.all().filter(archived=False).order_by('-created')
         
@@ -69,13 +70,14 @@ def item_delete(request, item_pk):
     item.delete()
 
 
-class TagsView(View):
-    def get(self, request):
-        tags = Tag.objects.all().order_by('name')
-        
-        return render(request, 'tags.html', { 'tags': tags })
-
-
+class TagsView(generic.ListView):
+    template_name = 'tags.html'
+    context_object_name = 'tags'
+    
+    def get_queryset(self):
+        return Tag.objects.all().order_by('name')
+    
+   
 def tag_view(request, tag_pk):
     tag = Tag.objects.get(pk=tag_pk)
     items = Item.objects.filter(tags=tag).filter(archived=False).order_by('-created')
@@ -87,5 +89,5 @@ def tag_view(request, tag_pk):
         return redirect('tag_view', tag.pk)
     
     return render(request, 'tag.html', { 'tag': tag, 'items': items })
-    
+
 
